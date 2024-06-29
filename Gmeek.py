@@ -110,7 +110,7 @@ class GMEEK():
     def transmarkdown(self,mdstr):
         if not os.path.exists("/opt/Gmeek/docs/imgs"):
             os.mkdir("/opt/Gmeek/docs/imgs")
-        imgList = re.findall("https://github.com/FFute/ffute.github.io/assets/[\w\-]*",mdstr)
+        imgList = re.findall("https://github.com/FFute/ffute.github.io/assets/[\w\-\/]*",mdstr)
         for img in imgList:
             if(img):
                 print(img)
