@@ -114,7 +114,7 @@ class GMEEK():
         return mdstr.replace("https://github.com/FFute/ffute.github.io/assets","assets")
 
     def markdown2html(self, mdstr):
-        mdstr=transmarkdown(mdstr)
+        mdstr=self.transmarkdown(mdstr)
         payload = {"text": mdstr, "mode": "gfm"}
         headers = {"Authorization": "token {}".format(self.options.github_token)}
         try:
