@@ -110,14 +110,13 @@ class GMEEK():
     def transmarkdown(self,mdstr):
         if not os.path.exists("/opt/Gmeek/docs/imgs"):
             os.mkdir("/opt/Gmeek/docs/imgs")
-        imgList = re.findall("!\[(.*)\]\((https://github.com/FFute/ffute.github.io/assets/.*)\)",mdstr)
+        imgList = re.findall("https://github.com/FFute/ffute.github.io/assets/[a-z\-]*",mdstr)
         for img in imgList:
-            urllib.request.urlretrieve(img[1], "/opt/Gmeek/docs/imgs/"+img[1].split("/")[-1])
-            mdstr = mdstr.replace(img[1],"/imgs/"+img[1].split("/")[-1])
+            urllib.request.urlretrieve(img, "/opt/Gmeek/docs/imgs/"+img.split("/")[-1])
+            mdstr = mdstr.replace(img,"/imgs/"+img.split("/")[-1])
         return mdstr
 
     def markdown2html(self, mdstr):
-        mdstr=self.transmarkdown(mdstr)
         payload = {"text": mdstr, "mode": "gfm"}
         headers = {"Authorization": "token {}".format(self.options.github_token)}
         try:
@@ -132,6 +131,7 @@ class GMEEK():
         env = Environment(loader=file_loader)
         template = env.get_template(template)
         output = template.render(blogBase=blogBase,postListJson=postListJson,i18n=self.i18n,IconList=icon)
+        mdstr=self.transmarkdown(output)
         f = open(htmlDir, 'w', encoding='UTF-8')
         f.write(output)
         f.close()
