@@ -111,7 +111,7 @@ class GMEEK():
         imgList = re.findall("!\[(.*)\]\((https://github.com/FFute/ffute.github.io/assets/.*)\)",mdstr)
         for img in imgList:
             urllib.request.urlretrieve(img, img.replace("https://github.com/FFute/ffute.github.io/",""))
-        return mdstr.replace("https://github.com/FFute/ffute.github.io/assets","assets");
+        return mdstr.replace("https://github.com/FFute/ffute.github.io/assets","assets")
 
     def markdown2html(self, mdstr):
         mdstr=transmarkdown(mdstr)
