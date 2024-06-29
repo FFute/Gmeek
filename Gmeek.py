@@ -133,7 +133,7 @@ class GMEEK():
         env = Environment(loader=file_loader)
         template = env.get_template(template)
         output = template.render(blogBase=blogBase,postListJson=postListJson,i18n=self.i18n,IconList=icon)
-        mdstr=self.transmarkdown(output)
+        output = self.transmarkdown(output)
         f = open(htmlDir, 'w', encoding='UTF-8')
         f.write(output)
         f.close()
