@@ -107,7 +107,14 @@ class GMEEK():
     def get_repo(self,user:Github, repo:str):
         return user.get_repo(repo)
 
+    def transmarkdown(self,mdstr):
+        imgList = re.findall("!\[(.*)\]\((https://github.com/FFute/ffute.github.io/assets/.*)\)",mdstr)
+        for img in imgList:
+            urllib.request.urlretrieve(img, img.replace("https://github.com/FFute/ffute.github.io/",""))
+        return mdstr.replace("https://github.com/FFute/ffute.github.io/assets","assets");
+
     def markdown2html(self, mdstr):
+        mdstr=transmarkdown(mdstr)
         payload = {"text": mdstr, "mode": "gfm"}
         headers = {"Authorization": "token {}".format(self.options.github_token)}
         try:
