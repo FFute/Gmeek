@@ -108,8 +108,8 @@ class GMEEK():
         return user.get_repo(repo)
 
     def transmarkdown(self,mdstr):
-        if not os.path.exists("/opt/Gmeek/docs/imgs/"):
-            os.mkdir("/opt/Gmeek/docs/imgs/")
+        if not os.path.exists("/opt/Gmeek/docs/imgs"):
+            os.mkdir("/opt/Gmeek/docs/imgs")
         imgList = re.findall("!\[(.*)\]\((https://github.com/FFute/ffute.github.io/assets/.*)\)",mdstr)
         for img in imgList:
             urllib.request.urlretrieve(img[1], "/opt/Gmeek/docs/imgs/"+img[1].split("/")[-1])
