@@ -108,9 +108,11 @@ class GMEEK():
         return user.get_repo(repo)
 
     def transmarkdown(self,mdstr):
+        os.mkdir("/opt/Gmeek/docs/imgs/")
         imgList = re.findall("!\[(.*)\]\((https://github.com/FFute/ffute.github.io/assets/.*)\)",mdstr)
         for img in imgList:
-            urllib.request.urlretrieve(img[1], img[1].replace("https://github.com/FFute/ffute.github.io/",""))
+            urllib.request.urlretrieve(img[1], "/opt/Gmeek/docs/imgs/"+img[1].split("/")[-1])
+            mdstr = mdstr.replace(img[1],"imgs/"+img[1].split("/")[-1])
         return mdstr.replace("https://github.com/FFute/ffute.github.io/assets","assets")
 
     def markdown2html(self, mdstr):
