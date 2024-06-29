@@ -113,6 +113,7 @@ class GMEEK():
         imgList = re.findall("https://github.com/FFute/ffute.github.io/assets/[a-z\-]*",mdstr)
         for img in imgList:
             if(img):
+                print(img)
                 urllib.request.urlretrieve(img, "/opt/Gmeek/docs/imgs/"+img.split("/")[-1])
                 mdstr = mdstr.replace(img,"/imgs/"+img.split("/")[-1])
         return mdstr
