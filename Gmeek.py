@@ -109,7 +109,7 @@ class GMEEK():
 
     def transmarkdown(self,mdstr):
         opener = urllib.request.build_opener()
-        opener.addheaders = [('authorization', 'Bearer ${{ secrets.GITHUB_TOKEN }}')]
+        opener.addheaders = [('Authorization', "token {}".format(self.options.github_token))]
         urllib.request.install_opener(opener)
         if not os.path.exists("/opt/Gmeek/docs/imgs"):
             os.mkdir("/opt/Gmeek/docs/imgs")
