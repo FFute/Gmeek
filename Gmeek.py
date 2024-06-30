@@ -108,9 +108,9 @@ class GMEEK():
         return user.get_repo(repo)
 
     def transmarkdown(self,mdstr):
-        opener = urllib.request.build_opener()
-        opener.addheaders = [('Authorization', "token {}".format(self.options.github_token))]
-        urllib.request.install_opener(opener)
+        # opener = urllib.request.build_opener()
+        # opener.addheaders = [('Authorization', "token {}".format(self.options.github_token))]
+        # urllib.request.install_opener(opener)
         if not os.path.exists("/opt/Gmeek/docs/imgs"):
             os.mkdir("/opt/Gmeek/docs/imgs")
         imgList = re.findall("https://github.com/FFute/ffute.github.io/assets/[\w\-\/]*",mdstr)
