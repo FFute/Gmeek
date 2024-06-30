@@ -108,12 +108,16 @@ class GMEEK():
         return user.get_repo(repo)
 
     def transmarkdown(self,mdstr):
+        opener = urllib.request.build_opener()
+        opener.addheaders = [('authorization', 'Bearer ${{ secrets.GITHUB_TOKEN }}')]
+        urllib.request.install_opener(opener)
         if not os.path.exists("/opt/Gmeek/docs/imgs"):
             os.mkdir("/opt/Gmeek/docs/imgs")
         imgList = re.findall("https://github.com/FFute/ffute.github.io/assets/[\w\-\/]*",mdstr)
         for img in imgList:
             if(img):
                 print(img)
+                #--header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
                 urllib.request.urlretrieve(img, "/opt/Gmeek/docs/imgs/"+img.split("/")[-1])
                 mdstr = mdstr.replace(img,"/imgs/"+img.split("/")[-1])
         return mdstr
